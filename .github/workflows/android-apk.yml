@@ -23,7 +23,10 @@ jobs:
 
       - name: Ensure Android SDK packages
         run: |
-          export PATH="$ANDROID_HOME/cmdline-tools/latest/bin:$PATH"
+          ls "$ANDROID_HOME/cmdline-tools/" || true
+          TOOLS_DIR=$(ls -d "$ANDROID_HOME"/cmdline-tools/* 2>/dev/null | head -n 1)
+          export PATH="$TOOLS_DIR/bin:$PATH"
+          which sdkmanager
           yes | sdkmanager --licenses > /dev/null || true
           sdkmanager "platforms;android-36" "build-tools;36.0.0" "platform-tools"
 
