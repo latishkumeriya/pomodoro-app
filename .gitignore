@@ -1,0 +1,19 @@
+# deps
+node_modules/
+
+# build output (rebuilt in CI)
+dist/
+build.log
+
+# android local build outputs
+android/app/build/
+android/build/
+android/.gradle/
+android/local.properties
+android/capacitor-cordova-android-plugins/build/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+*.log
