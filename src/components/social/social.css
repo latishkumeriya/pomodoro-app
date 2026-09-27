@@ -1,0 +1,32 @@
+.social { margin-top: 16px; text-align: left; }
+.rank-pill { background: #111; color: #ffd166; border-radius: 999px; padding: 4px 12px; font-size: 13px; font-weight: 800; }
+.goal { margin: 12px 0; }
+.goal-top { display: flex; justify-content: space-between; font-weight: 700; font-size: 14px; }
+.goal-bar { height: 12px; background: #f3e2e2; border-radius: 999px; overflow: hidden; margin-top: 6px; }
+.goal-bar i { display: block; height: 100%; background: linear-gradient(90deg, #37c24a, #3b82f6); }
+.room-list { display: flex; flex-direction: column; gap: 6px; margin: 8px 0 4px; }
+.room-row { display: flex; align-items: center; gap: 8px; background: #fafafa; border: 1px solid #eee; border-radius: 12px; padding: 8px 10px; font-size: 14px; }
+.room-row.you { background: #fff7f7; border-color: #ff4d4d; }
+.room-row .dot { width: 12px; height: 12px; border-radius: 50%; display: inline-block; }
+.room-row .st { font-size: 12px; opacity: 0.75; }
+.room-row .st.focus { color: #b91c1c; }
+.room-row .st.break { color: #15803d; }
+.mini-bar { flex: 1; height: 8px; background: #f3e2e2; border-radius: 999px; overflow: hidden; min-width: 60px; }
+.mini-bar i { display: block; height: 100%; background: #ff4d4d; transition: width 2.5s linear; }
+.wk { font-size: 12px; font-weight: 800; white-space: nowrap; }
+.room-row button { border-radius: 999px; border: 1px solid #e5e5e5; background: #fff; cursor: pointer; font-weight: 700; }
+.board { margin: 10px 0 4px; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.board-title { font-size: 17px; margin: 14px 0 2px; letter-spacing: -0.2px; }
+.rank-row { display: flex; align-items: center; gap: 10px; background: #fff; border: 1px solid #f1e4e4; border-radius: 14px; padding: 9px 14px 9px 9px; font-weight: 600; box-shadow: 0 2px 8px rgba(255,77,77,0.06); }
+.rank-row.first { border-color: #fbbf24; background: linear-gradient(90deg, #fffbeb, #fff); box-shadow: 0 4px 14px rgba(251,191,36,0.25); }
+.rank-row.you { border-color: #ff4d4d; background: linear-gradient(90deg, #fff1f1, #fff); }
+.medal { width: 28px; height: 28px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; background: #f3e2e2; color: #7c2d12; flex-shrink: 0; }
+.medal.m1 { background: linear-gradient(135deg, #fde68a, #f59e0b); color: #451a03; }
+.medal.m2 { background: linear-gradient(135deg, #e5e7eb, #9ca3af); color: #111827; }
+.medal.m3 { background: linear-gradient(135deg, #fed7aa, #c2703d); color: #431407; }
+.rank-row .dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.rname { min-width: 70px; }
+.rbar { flex: 1; height: 8px; background: #f6e7e7; border-radius: 999px; overflow: hidden; min-width: 40px; }
+.rbar i { display: block; height: 100%; border-radius: 999px; background: linear-gradient(90deg, #ff4d4d, #fb923c); transition: width 1s ease; }
+.rank-row.first .rbar i { background: linear-gradient(90deg, #f59e0b, #fbbf24); }
+.rscore { font-variant-numeric: tabular-nums; font-size: 15px; min-width: 24px; text-align: right; }

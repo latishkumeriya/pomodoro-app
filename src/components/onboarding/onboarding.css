@@ -1,0 +1,18 @@
+.ob-wrap { min-height: 100svh; display: flex; align-items: center; justify-content: center; padding: 24px 16px; background: linear-gradient(#fff7f7, #ffe3e3); }
+.ob-card { background: #fff; border: 2px solid #ffd1d1; border-radius: 24px; max-width: 640px; width: 100%; padding: 24px; text-align: center; box-shadow: 0 20px 60px rgba(255,77,77,0.15); }
+.ob-card h1 { margin: 12px 0 4px; font-size: 30px; }
+.ob-card p { opacity: 0.7; margin: 0 0 12px; }
+.ob-dots { display: flex; gap: 6px; justify-content: center; }
+.ob-dots i { width: 26px; height: 8px; border-radius: 999px; background: #f3e2e2; }
+.ob-dots i.on { background: #ff4d4d; }
+.ob-dots i.done { background: #fbbf24; }
+.ob-art { margin: 8px 0 4px; }
+.ob-demo { background: #fff7f7; border: 1px solid #ffd1d1; border-radius: 14px; padding: 14px; font-size: 18px; }
+.ob-demo b { font-size: 40px; font-variant-numeric: tabular-nums; display: block; }
+.ob-demo .row, .ob-card .row { display: flex; gap: 8px; justify-content: center; margin-top: 8px; flex-wrap: wrap; }
+.ob-demo .row.wrap { margin-bottom: 4px; }
+.ob-card button { border-radius: 999px; border: 1px solid #e5e5e5; background: #fff; padding: 8px 16px; font-weight: 700; cursor: pointer; }
+.ob-card button.on, .ob-card button.primary { background: #ff4d4d; color: #fff; border-color: #ff4d4d; }
+.ob-card button:disabled { opacity: 0.4; cursor: default; }
+.ob-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 12px; }
+.ob-skip { margin-top: 8px; opacity: 0.55; border: none !important; background: none !important; }

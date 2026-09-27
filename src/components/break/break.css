@@ -1,0 +1,16 @@
+.breakcard { margin-top: 16px; text-align: left; }
+.break-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 12px 0; }
+@media (max-width: 700px) { .break-grid { grid-template-columns: 1fr; } }
+.breath-box, .stretch-box { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 14px; padding: 12px; text-align: center; }
+.breath-ball { width: 110px; height: 110px; margin: 0 auto 8px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #bae6fd, #38bdf8); display: flex; align-items: center; justify-content: center; font-weight: 800; color: #0c4a6e; transition: transform 1s ease; }
+.breath-ball.Breathein { transform: scale(1.25); }
+.breath-ball.Hold { transform: scale(1.25); background: radial-gradient(circle at 35% 35%, #fef9c3, #fbbf24); }
+.breath-ball.Breatheout { transform: scale(0.85); background: radial-gradient(circle at 35% 35%, #bbf7d0, #22c55e); }
+.breath-box button, .stretch-box button, .mini-head button { border-radius: 999px; border: 1px solid #e5e5e5; background: #fff; padding: 6px 12px; font-weight: 700; cursor: pointer; }
+.stretch-box p { margin: 4px 0 8px; opacity: 0.75; font-size: 14px; }
+.stretch-box .row { display: flex; gap: 8px; justify-content: center; }
+.mini { margin-top: 4px; }
+.mini-head { display: flex; gap: 10px; align-items: center; margin-bottom: 6px; }
+.mini-arena { position: relative; height: 200px; background: linear-gradient(#e0f2fe, #fef9c3); border: 1px solid #e2e8f0; border-radius: 14px; overflow: hidden; }
+.falling { position: absolute; font-size: 26px; background: none; border: none; cursor: pointer; transform: translate(-50%, 0); transition: top 0.12s linear; }
+.mini-hint { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; opacity: 0.55; font-size: 14px; }

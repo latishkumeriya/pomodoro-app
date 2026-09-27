@@ -1,0 +1,13 @@
+.prod-box { background: #fff; border: 2px solid #ffd1d1; border-radius: 20px; padding: 16px 20px; margin-top: 16px; }
+.prod-box h2 { margin: 0; font-size: 18px; }
+.prod-box .row { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
+.prod-box button { border-radius: 999px; border: 1px solid #e5e5e5; background: #fff; padding: 6px 14px; font-weight: 700; cursor: pointer; }
+.prod-box button.on { background: #111; color: #ffd166; border-color: #111; }
+.task-add { display: flex; gap: 8px; margin: 10px 0; }
+.task-add input:first-child { flex: 1; border: 1px solid #ead; border-radius: 10px; padding: 8px 12px; }
+.task-add input[type='number'] { width: 64px; border: 1px solid #ead; border-radius: 10px; padding: 8px; }
+.task-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.task-list li { display: flex; gap: 8px; align-items: center; background: #fafafa; border: 1px solid #eee; padding: 8px 10px; border-radius: 12px; }
+.task-list li.done .tt { text-decoration: line-through; opacity: 0.55; }
+.task-list .tt { flex: 1; font-weight: 600; }
+.task-list .est { font-size: 12px; font-weight: 800; white-space: nowrap; }

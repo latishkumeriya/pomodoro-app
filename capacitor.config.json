@@ -1,0 +1,9 @@
+{
+  "appId": "com.pomofocus.app",
+  "appName": "Pomo Focus",
+  "webDir": "dist",
+  "backgroundColor": "#fff7f7",
+  "android": {
+    "allowMixedContent": false
+  }
+}

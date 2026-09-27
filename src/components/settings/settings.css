@@ -1,0 +1,19 @@
+.settings { margin-top: 16px; text-align: left; }
+.set-row { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px dashed #f3d1d1; }
+.set-row:last-child { border-bottom: none; }
+.set-row b { font-size: 15px; }
+.set-row p { margin: 2px 0 0; font-size: 13px; opacity: 0.6; }
+.set-row button, .set-row select, .set-row input { border-radius: 999px; border: 1px solid #e5e5e5; background: #fff; padding: 6px 14px; font-weight: 700; cursor: pointer; }
+.set-row button.on { background: #111; color: #ffd166; border-color: #111; }
+.set-row button.danger { background: #fee2e2; border-color: #fca5a5; color: #b91c1c; }
+.set-row input[type='number'] { width: 72px; text-align: center; }
+.set-row select { border-radius: 10px; }
+.set-section { padding: 10px 0; border-bottom: 1px dashed #f3d1d1; }
+.set-section > b { font-size: 15px; }
+.set-section > p { margin: 2px 0 8px; font-size: 13px; opacity: 0.6; }
+.preset-grid { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 4px; }
+.preset-grid button { border-radius: 999px; border: 1px solid #e5e5e5; background: #fff; padding: 6px 14px; font-weight: 700; cursor: pointer; }
+.preset-grid button.on { background: #ff4d4d; color: #fff; border-color: #ff4d4d; }
+.custom-row { display: flex; gap: 14px; margin-top: 8px; align-items: center; flex-wrap: wrap; font-size: 13px; font-weight: 600; }
+.custom-row label { display: inline-flex; align-items: center; gap: 5px; }
+.custom-row input { width: 56px; border: 1px solid #ead; border-radius: 8px; padding: 4px 6px; font-size: 13px; text-align: center; }
