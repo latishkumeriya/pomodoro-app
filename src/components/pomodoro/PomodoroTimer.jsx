@@ -12,7 +12,7 @@ import { DayReport } from '../productivity/DayReport';
 import { Settings } from '../settings/Settings';
 import { useSettings } from '../../lib/settings';
 import { themeNow } from '../../lib/daypart';
-import { blockerStart, blockerStop } from '../../lib/blocker';
+import { blockerStart, blockerStatus, blockerStop } from '../../lib/blocker';
 import '../productivity/productivity.css';
 import '../settings/settings.css';
 import '../focus/focus.css';
@@ -98,7 +98,15 @@ export function PomodoroTimer() {
       } catch {
         /* ignore */
       }
-      if (on) blockerStart(Date.now() + secondsRef.current * 1000);
+      if (on) {
+        blockerStatus().then((st) => {
+          if (st.usage && st.overlay) {
+            blockerStart(Date.now() + secondsRef.current * 1000);
+          } else {
+            setToast('Blocking needs Usage + Overlay permission (Settings)');
+          }
+        });
+      }
     } else {
       blockerStop();
     }

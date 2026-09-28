@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { isNativeApp, openOverlaySettings, openUsageSettings, useBlocker } from '../../lib/blocker';
+import { blockerStatus, isNativeApp, openOverlaySettings, openUsageSettings, useBlocker } from '../../lib/blocker';
 import './settings.css';
 
 export function Settings({ settings, update, resetAll, onToast, presets = [], presetId, onPreset, durations, onCustom }) {
@@ -21,7 +21,30 @@ export function Settings({ settings, update, resetAll, onToast, presets = [], pr
   const blockingRow = native ? (
     <div className="set-row">
       <div><b>Block other apps</b><p>Bounce back here if you leave mid-session</p></div>
-      <button className={blocker.enabled ? 'on' : ''} onClick={blocker.toggle}>
+      <button
+        className={blocker.enabled ? 'on' : ''}
+        onClick={async () => {
+          if (!blocker.enabled) {
+            // turning on: make sure the two permissions exist first
+            const st = await blockerStatus();
+            await blocker.refresh();
+            if (!st.usage) {
+              onToast?.('Step 1 of 2: allow Usage access, then come back');
+              openUsageSettings();
+              blocker.toggle();
+              return;
+            }
+            if (!st.overlay) {
+              onToast?.('Step 2 of 2: allow Display over apps, then come back');
+              openOverlaySettings();
+              blocker.toggle();
+              return;
+            }
+            onToast?.('App blocking on — guard ready');
+          }
+          blocker.toggle();
+        }}
+      >
         {blocker.enabled ? 'On' : 'Off'}
       </button>
     </div>
