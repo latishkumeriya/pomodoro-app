@@ -1,6 +1,16 @@
+import { useEffect } from 'react';
+import { isNativeApp, openOverlaySettings, openUsageSettings, useBlocker } from '../../lib/blocker';
 import './settings.css';
 
 export function Settings({ settings, update, resetAll, onToast, presets = [], presetId, onPreset, durations, onCustom }) {
+  const blocker = useBlocker();
+  const native = isNativeApp();
+
+  useEffect(() => {
+    if (native) blocker.refresh();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [native]);
+
   const row = (label, desc, control) => (
     <div className="set-row" key={label}>
       <div><b>{label}</b><p>{desc}</p></div>
@@ -8,9 +18,46 @@ export function Settings({ settings, update, resetAll, onToast, presets = [], pr
     </div>
   );
 
+  const blockingRow = native ? (
+    <div className="set-row">
+      <div><b>Block other apps</b><p>Bounce back here if you leave mid-session</p></div>
+      <button className={blocker.enabled ? 'on' : ''} onClick={blocker.toggle}>
+        {blocker.enabled ? 'On' : 'Off'}
+      </button>
+    </div>
+  ) : null;
+
+  const permissionRows = native ? (
+    <>
+      <div className="set-row">
+        <div><b>Usage access</b><p>Lets the guard see app switches</p></div>
+        {blocker.status.usage ? (
+          <button className="on">Granted</button>
+        ) : (
+          <button onClick={async () => { openUsageSettings(); setTimeout(() => blocker.refresh(), 1000); }}>Grant</button>
+        )}
+      </div>
+      <div className="set-row">
+        <div><b>Display over apps</b><p>Shows the return screen</p></div>
+        {blocker.status.overlay ? (
+          <button className="on">Granted</button>
+        ) : (
+          <button onClick={async () => { openOverlaySettings(); setTimeout(() => blocker.refresh(), 1000); }}>Grant</button>
+        )}
+      </div>
+    </>
+  ) : (
+    <div className="set-row">
+      <div><b>Block other apps</b><p>Available in the Android app version</p></div>
+      <button disabled>App only</button>
+    </div>
+  );
+
   return (
     <div className="pomo-card settings">
       <div className="rew-head"><h2>⚙️ Settings</h2></div>
+      {blockingRow}
+      {permissionRows}
       <div className="set-row">
         <div><b>Timer preset</b><p>Pick a rhythm — its minutes appear below</p></div>
         <select

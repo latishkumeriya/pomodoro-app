@@ -12,6 +12,7 @@ import { DayReport } from '../productivity/DayReport';
 import { Settings } from '../settings/Settings';
 import { useSettings } from '../../lib/settings';
 import { themeNow } from '../../lib/daypart';
+import { blockerStart, blockerStop } from '../../lib/blocker';
 import '../productivity/productivity.css';
 import '../settings/settings.css';
 import '../focus/focus.css';
@@ -85,6 +86,24 @@ export function PomodoroTimer() {
     if (running && !celebrating && lockOn) setLocked(true);
     else if (!running || celebrating) setLocked(false);
   }, [mode, running, celebrating, lockOn]);
+
+  // native app blocker follows the lock screen
+  const secondsRef = useRef(secondsLeft);
+  secondsRef.current = secondsLeft;
+  useEffect(() => {
+    if (locked) {
+      let on = false;
+      try {
+        on = localStorage.getItem('pomo-blocker-on') === '1';
+      } catch {
+        /* ignore */
+      }
+      if (on) blockerStart(Date.now() + secondsRef.current * 1000);
+    } else {
+      blockerStop();
+    }
+  }, [locked]);
+  useEffect(() => () => { blockerStop(); }, []);
 
   const toggleLockOn = () => {
     setLockOn((v) => {
