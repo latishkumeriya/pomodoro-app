@@ -6,6 +6,7 @@ import { recordToday } from '../../lib/rewards';
 import { RewardsPanel } from '../rewards/RewardsPanel';
 import { SocialRooms } from '../social/SocialRooms';
 import { BreakPlay } from '../break/BreakPlay';
+import { FocusLock } from '../focus/FocusLock';
 import { TaskList } from '../productivity/TaskList';
 import { DayReport } from '../productivity/DayReport';
 import { Settings } from '../settings/Settings';
@@ -13,6 +14,7 @@ import { useSettings } from '../../lib/settings';
 import { themeNow } from '../../lib/daypart';
 import '../productivity/productivity.css';
 import '../settings/settings.css';
+import '../focus/focus.css';
 import './pomodoro.css';
 
 const PRESETS = { focus: 25 * 60, short: 5 * 60, long: 15 * 60 };
@@ -65,9 +67,44 @@ export function PomodoroTimer() {
   const { profile, addXP, poke, setSkin, unlock, wear, setMascot, level } = usePomoProfile();
   const { settings, update, resetAll } = useSettings();
   const settingsRef = useRef(settings);
+  // focus lock: fullscreen guard screen while a focus session runs
+  const [lockOn, setLockOn] = useState(() => {
+    try {
+      return localStorage.getItem('pomo-lockon') !== '0';
+    } catch {
+      return true;
+    }
+  });
+  const [locked, setLocked] = useState(false);
   useEffect(() => {
     settingsRef.current = settings;
   }, [settings]);
+
+  // enter/exit the lock screen with any running session
+  useEffect(() => {
+    if (running && !celebrating && lockOn) setLocked(true);
+    else if (!running || celebrating) setLocked(false);
+  }, [mode, running, celebrating, lockOn]);
+
+  const toggleLockOn = () => {
+    setLockOn((v) => {
+      try {
+        localStorage.setItem('pomo-lockon', v ? '0' : '1');
+      } catch {
+        /* ignore */
+      }
+      return !v;
+    });
+  };
+
+  const giveUp = () => {
+    clearTimeout(celebrateTimeout.current);
+    setRunning(false);
+    setCelebrating(false);
+    setLocked(false);
+    setSecondsLeft(total);
+    setToast('Session failed — guardian is sad');
+  };
   const [toast, setToast] = useState(null);
   const [durations, setDurations] = useState(PRESETS);
   const [presetId, setPresetId] = useState('classic');
@@ -351,6 +388,13 @@ export function PomodoroTimer() {
             <button onClick={reset}>↺ Reset</button>
           </div>
 
+          <div className="lock-toggle">
+            <span>🔒 Lock phone on timer</span>
+            <button className={lockOn ? 'on' : ''} onClick={toggleLockOn}>
+              {lockOn ? 'On' : 'Off'}
+            </button>
+          </div>
+
           <div className="pomo-dots">
             {Array.from({ length: ROUND_SIZE }).map((_, i) => (
               <span key={i} className={i < completed % ROUND_SIZE || (completed > 0 && completed % ROUND_SIZE === 0) ? 'done' : ''} />
@@ -376,6 +420,25 @@ export function PomodoroTimer() {
       <RewardsPanel total={completed} profile={profile} level={level} onToast={setToast} />
       <BreakPlay onEarn={(n) => addXP(n)} onToast={setToast} />
       <SocialRooms userName={profile.name} userTotal={completed} onToast={setToast} />
+      {locked && (
+        <FocusLock
+          secondsLeft={secondsLeft}
+          total={total}
+          mode={mode}
+          running={running}
+          mascot={profile.mascot || 'tomato'}
+          mascotName={profile.name}
+          level={level}
+          xp={profile.xp}
+          bodyColor={skinColor}
+          accessory={profile.accessory}
+          theme={theme}
+          onTogglePause={() => setRunning((r) => !r)}
+          onGiveUp={giveUp}
+          onToast={setToast}
+          lockMood={!running ? 'idle' : mode === 'focus' ? 'focus' : 'break'}
+        />
+      )}
       {toast && <div className="pomo-toast">{toast}</div>}
     </div>
   );

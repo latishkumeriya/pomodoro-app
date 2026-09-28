@@ -4,6 +4,7 @@ import { ContactShadows, Float, OrbitControls } from '@react-three/drei';
 import { TomatoMascot3D } from './TomatoMascot3D';
 import { EmberFox } from './characters/EmberFox';
 import { CosmoCat } from './characters/CosmoCat';
+import { LeoKitten } from './characters/LeoKitten';
 
 const MOOD_TEXT = {
   idle: 'Hey! Ready to focus?',
@@ -152,6 +153,8 @@ export function PomodoroMascot({
                   <EmberFox mood={mood} bodyColor={bodyColor} pokeTick={pokeTick} daypart={theme} />
                 ) : mascot === 'cat' ? (
                   <CosmoCat mood={mood} bodyColor={bodyColor} pokeTick={pokeTick} daypart={theme} />
+                ) : mascot === 'leo' ? (
+                  <LeoKitten mood={mood} bodyColor={bodyColor} pokeTick={pokeTick} />
                 ) : (
                   <TomatoMascot3D mood={mood} bodyColor={tint} accessory={accessory} pokeTick={pokeTick} daypart={theme} />
                 )}
